@@ -6,13 +6,13 @@ import { Transakcija } from '../model/Transakcija';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
 
   paymentUrl: string;
   paymentId: string;
+  bankaPort: string;
   uplata: Uplata;
 
   vlasnik: string;
@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.paymentUrl = params.get('paymentUrl'); // (+) converts string 'id' to a number
       this.paymentId = params.get('paymentId');
+      this.bankaPort = params.get('bankaPort');
       this.homeService.proveriUrl(this.paymentUrl, this.paymentId).subscribe(
         data => {
           this.uplata = data;
@@ -58,7 +59,7 @@ export class HomeComponent implements OnInit {
     this.transakcija.pan = this.brojKartice;
     this.transakcija.sigurnosniKod = this.sigurnosniBroj;
 
-    this.homeService.posaljiTransakciju(this.transakcija).subscribe( data => {
+    this.homeService.posaljiTransakciju(this.transakcija, this.bankaPort).subscribe( data => {
 
     });
     

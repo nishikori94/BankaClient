@@ -15,7 +15,7 @@ export class HomeService {
     return this.http.get<Uplata>(`http://localhost:9092/placanje/proveriUrl/` + paymentUrl + `/` + paymentId);
   }
 
-  posaljiTransakciju(transakcija: Transakcija): Observable<any> {
-    return this.http.post<any>(`http://localhost:9092/placanje/proveriPodatke/`, transakcija);
+  posaljiTransakciju(transakcija: Transakcija, bankaPort: string): Observable<any> {
+    return this.http.post<any>(`http://localhost:` + bankaPort + `/placanje/proveriPodatke/`, transakcija);
   }
 }

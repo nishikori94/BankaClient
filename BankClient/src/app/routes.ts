@@ -3,5 +3,5 @@ import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: ':paymentUrl/:paymentId', component: HomeComponent},
+    { path: ':paymentUrl/:paymentId/:bankaPort', component: HomeComponent},
 ]
