@@ -1,13 +1,88 @@
-<form role="form" #transakcijaForm="ngForm">
-<label for="cname">Name on Card</label>
-<input type="text" [(ngModel)]="vlasnik"  id="cname" name="cardname" placeholder="John More Doe">
-<label for="ccnum">Credit card number</label>
-<input type="text" [(ngModel)]="brojKartice" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-<label for="expmonth">Exp Month</label>
-<input type="text" [(ngModel)]="mesecIsteka" id="expmonth" name="expmonth" placeholder="September">
-<label for="expyear">Exp Year</label>
-<input type="text" [(ngModel)]="godinaIsteka" id="expyear" name="expyear" placeholder="2018">
-<label for="cvv">CVV</label>
-<input type="text" [(ngModel)]="sigurnosniBroj" id="cvv" name="cvv" placeholder="352">
-<button type="submit" (click)="posaljiTransakciju()" class="btn btn-success">Submit</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form #transakcijaForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="vlasnik">Naziv vlasnika kartice</label>
+                    <input type="text" class="form-control" id="vlasnik" required [(ngModel)]="transakcija.nazivVlasnikaKartice"
+                        name="nazivVlasnikaKartice" pattern="[a-zA-Z]+\s[a-zA-Z]+" #nazivVlasnikaKartice="ngModel">
+                    <div [hidden]="nazivVlasnikaKartice.valid || nazivVlasnikaKartice.pristine" class="alert alert-danger">
+                        <div [hidden]="!nazivVlasnikaKartice.hasError('required')">Morate uneti naziv vlasnika kartice</div>
+                        <div [hidden]="!nazivVlasnikaKartice.hasError('pattern')">Nepravilan unos naziv vlasnika
+                            kartice</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pan">Broj kartice</label>
+                    <input type="text" class="form-control" id="pan" required [(ngModel)]="transakcija.pan"
+                        name="pan" pattern="[0-9-]+" #pan="ngModel">
+                    <div [hidden]="pan.valid || pan.pristine" class="alert alert-danger">
+
+                        <div [hidden]="!pan.hasError('required')">Morate uneti broj kartice</div>
+                        <div [hidden]="!pan.hasError('pattern')">Nepravilan unos broja kartice</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mesecIsteka">Vazenje kartice</label>
+                    <div class="row">
+                        <div class="col-6">
+                            <select class="form-control" id="mesecIsteka" required [(ngModel)]="mesecIsteka" name="mesecIsteka">
+                                <option selected>Mesec</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control" id="godinaIsteka" required [(ngModel)]="godinaIsteka"
+                                name="godinaIsteka">
+                                <option>Godina</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sigurnosniKod">CVV</label>
+                    <div class="row">
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="sigurnosniKod" required [(ngModel)]="transakcija.sigurnosniKod"
+                                name="sigurnosniKod" pattern="[0-9]{3}" #sigurnosniKod="ngModel">
+                            <div [hidden]="sigurnosniKod.valid || sigurnosniKod.pristine" class="alert alert-danger">
+                                <div [hidden]="!sigurnosniKod.hasError('required')">Morate uneti sigurnosni kod kartice</div>
+                                <div [hidden]="!sigurnosniKod.hasError('pattern')">Nepravilan unos sigurnosnog koda
+                                    kartice</div>
+                            </div>
+                        </div>
+                        <div class="col-3"><button type="submit" class="btn btn-success" [disabled]="!transakcijaForm.form.valid" (click)="posaljiTransakciju()">Potvrdi</button></div>
+                    </div>
+                </div>
+
+                
+
+            </form>
+        </div>
+    </div>
+</div>

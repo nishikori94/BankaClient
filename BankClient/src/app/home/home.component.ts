@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit {
   vlasnik: string;
   mesecIsteka: string;
   godinaIsteka: string;
-  sigurnosniBroj: string;
-  brojKartice: string;
+  sigurnosniKod: string;
+  pan: string;
 
   transakcija: Transakcija = {
     pan: "",
@@ -56,13 +56,14 @@ export class HomeComponent implements OnInit {
     this.transakcija.iznos = this.uplata.amount.toString();
     this.transakcija.uplataId = this.uplata.uplataId;
 
-    this.transakcija.pan = this.brojKartice;
-    this.transakcija.sigurnosniKod = this.sigurnosniBroj;
-
     this.homeService.posaljiTransakciju(this.transakcija, this.bankaPort).subscribe( data => {
 
     });
     
   }
+
+  submitted = false;
+
+  onSubmit() { this.submitted = true; }
 
 }
