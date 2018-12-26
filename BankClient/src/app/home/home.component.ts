@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     this.transakcija.uplataId = this.uplata.uplataId;
 
     this.homeService.posaljiTransakciju(this.transakcija, this.bankaPort).subscribe( data => {
-
+      window.location.href = data.url;
     });
     
   }
