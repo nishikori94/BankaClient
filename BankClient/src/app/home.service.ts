@@ -12,10 +12,10 @@ export class HomeService {
   constructor(private http: HttpClient) { }
 
   proveriUrl(paymentUrl: string, paymentId: string): Observable<Uplata> {
-    return this.http.get<Uplata>(`http://localhost:9092/placanje/proveriUrl/` + paymentUrl + `/` + paymentId);
+    return this.http.get<Uplata>(`https://localhost:9092/placanje/proveriUrl/` + paymentUrl + `/` + paymentId);
   }
 
   posaljiTransakciju(transakcija: Transakcija, bankaPort: string): Observable<any> {
-    return this.http.post<any>(`http://localhost:` + bankaPort + `/placanje/proveriPodatke/`, transakcija);
+    return this.http.post<any>(`https://localhost:` + bankaPort + `/placanje/proveriPodatke/`, transakcija);
   }
 }
