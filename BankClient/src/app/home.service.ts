@@ -15,6 +15,10 @@ export class HomeService {
     return this.http.get<Uplata>(`https://localhost:9092/placanje/proveriUrl/` + paymentUrl + `/` + paymentId);
   }
 
+  invalidirajLink(uplataId: number): Observable<any> {
+    return this.http.get<any>(`https://localhost:9092/placanje/invalidirajLink/` + uplataId);
+  }
+
   posaljiTransakciju(transakcija: Transakcija, bankaPort: string): Observable<any> {
     return this.http.post<any>(`https://localhost:` + bankaPort + `/placanje/proveriPodatke/`, transakcija);
   }

@@ -46,6 +46,10 @@ export class HomeComponent implements OnInit {
         }
       )
     });
+    setTimeout(() => {
+      this.homeService.invalidirajLink(this.uplata.uplataId);
+      window.location.href = "https://localhost:4201";
+  }, 5 * 60 * 1000);
   }
 
   posaljiTransakciju(){
